@@ -144,6 +144,8 @@ var (
 	SchedSpread = Bool("OLLAMA_SCHED_SPREAD")
 	// IntelGPU enables experimental Intel GPU detection.
 	IntelGPU = Bool("OLLAMA_INTEL_GPU")
+	// SplitRow sets the model split mode to row
+	SplitRow = Bool("OLLAMA_SPLIT_MODE_ROWS")
 )
 
 func String(s string) func() string {
@@ -258,6 +260,7 @@ func AsMap() map[string]EnvVar {
 		"OLLAMA_RUNNERS_DIR":       {"OLLAMA_RUNNERS_DIR", RunnersDir(), "Location for runners"},
 		"OLLAMA_SCHED_SPREAD":      {"OLLAMA_SCHED_SPREAD", SchedSpread(), "Always schedule model across all GPUs"},
 		"OLLAMA_TMPDIR":            {"OLLAMA_TMPDIR", TmpDir(), "Location for temporary files"},
+		"OLLAMA_SPLIT_MODE_ROWS":   {"OLLAMA_SPLIT_MODE_ROWS", SplitRow(), "Enabled split row mode"},
 	}
 	if runtime.GOOS != "darwin" {
 		ret["CUDA_VISIBLE_DEVICES"] = EnvVar{"CUDA_VISIBLE_DEVICES", CudaVisibleDevices(), "Set which NVIDIA devices are visible"}

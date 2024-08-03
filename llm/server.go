@@ -199,6 +199,10 @@ func NewLlamaServer(gpus gpu.GpuInfoList, model string, ggml *GGML, adapters, pr
 		params = append(params, "--verbose")
 	}
 
+	if envconfig.SplitRow() {
+		params = append(params, "--split-mode", "row")
+	}
+
 	if opts.MainGPU > 0 {
 		params = append(params, "--main-gpu", strconv.Itoa(opts.MainGPU))
 	}
